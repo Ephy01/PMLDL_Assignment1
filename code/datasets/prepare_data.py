@@ -1,5 +1,3 @@
-"""Read Ford listings, clean invalid values, and save train/test tables."""
-
 import argparse
 import json
 from pathlib import Path
@@ -48,7 +46,7 @@ def clean(data):
         data[column] = pd.to_numeric(data[column], errors="coerce")
         data[column] = data[column].replace([np.inf, -np.inf], np.nan)
 
-    # Training needs a known target. Do not invent prices for these rows.
+   
     valid_price = data[TARGET].notna() & (data[TARGET] > 0)
     data = data[valid_price].copy()
 
@@ -63,7 +61,7 @@ def clean(data):
         nonpositive_value = data[column] <= 0
         data.loc[nonpositive_value, column] = np.nan
 
-    # Missing features are filled later using statistics learned on train only.
+    
     data = data.drop_duplicates()
     return data.reset_index(drop=True)
 

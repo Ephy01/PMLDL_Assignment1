@@ -116,9 +116,6 @@ def main() -> None:
     if car_details is not None:
         show_prediction(car_details)
 
-    with st.expander("Held-out test metrics"):
-        st.json(metadata["metrics"])
-
 
 if __name__ == "__main__":
     main()
